@@ -7,13 +7,13 @@ import {
   deleteProduct,
   updateProduct,
 } from "../controllers/productController";
-import { protect, admin } from "../middleware/authMiddleware";
+import { protect} from "../middleware/authMiddleware";
 
-router.route("/").get(getProducts).post(createProduct);
+router.route("/").get(protect,getProducts).post(protect,createProduct);
 router
   .route("/:id")
   .get(getProductById)
-  .delete(deleteProduct)
-  .put(updateProduct);
+  .delete(protect,deleteProduct)
+  .put(protect,updateProduct);
 
 export default router;
